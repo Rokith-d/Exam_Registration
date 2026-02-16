@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exam Registration Form</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        input:focus, select:focus {
+            border-color: #667eea;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #5a67d8;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+
+        #successMessage {
+            margin-top: 15px;
+            text-align: center;
+            font-weight: bold;
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Exam Registration</h2>
+
+    <form id="registrationForm">
+
+        <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" id="name">
+            <small class="error" id="nameError"></small>
+        </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="email">
+            <small class="error" id="emailError"></small>
+        </div>
+
+        <div class="form-group">
+            <label>Phone Number</label>
+            <input type="text" id="phone">
+            <small class="error" id="phoneError"></small>
+        </div>
+
+        <div class="form-group">
+            <label>Date of Birth</label>
+            <input type="date" id="dob">
+            <small class="error" id="dobError"></small>
+        </div>
+
+        <div class="form-group">
+            <label>Gender</label>
+            <select id="gender">
+                <option value="">Select Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+            </select>
+            <small class="error" id="genderError"></small>
+        </div>
+
+        <div class="form-group">
+            <label>Exam Type</label>
+            <select id="exam">
+                <option value="">Select Exam</option>
+                <option>Engineering Entrance</option>
+                <option>Medical Entrance</option>
+                <option>Banking Exam</option>
+                <option>Government Exam</option>
+            </select>
+            <small class="error" id="examError"></small>
+        </div>
+
+        <button type="submit">Register</button>
+
+        <p id="successMessage"></p>
+
+    </form>
+</div>
+
+<script>
+    const form = document.getElementById("registrationForm");
+
+    form.addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const dob = document.getElementById("dob").value;
+        const gender = document.getElementById("gender").value;
+        const exam = document.getElementById("exam").value;
+
+        document.querySelectorAll(".error").forEach(el => el.textContent = "");
+        document.getElementById("successMessage").textContent = "";
+
+        let isValid = true;
+
+        if (name === "") {
+            document.getElementById("nameError").textContent = "Name is required";
+            isValid = false;
+        }
+
+        const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+        if (!email.match(emailPattern)) {
+            document.getElementById("emailError").textContent = "Enter valid email";
+            isValid = false;
+        }
+
+        const phonePattern = /^[0-9]{10}$/;
+        if (!phone.match(phonePattern)) {
+            document.getElementById("phoneError").textContent = "Enter 10 digit phone number";
+            isValid = false;
+        }
+
+        if (dob === "") {
+            document.getElementById("dobError").textContent = "Date of birth required";
+            isValid = false;
+        }
+
+        if (gender === "") {
+            document.getElementById("genderError").textContent = "Select gender";
+            isValid = false;
+        }
+
+        if (exam === "") {
+            document.getElementById("examError").textContent = "Select exam";
+            isValid = false;
+        }
+
+        if (isValid) {
+            const studentData = { name, email, phone, dob, gender, exam };
+
+            let registrations = JSON.parse(localStorage.getItem("registrations")) || [];
+            registrations.push(studentData);
+            localStorage.setItem("registrations", JSON.stringify(registrations));
+
+            document.getElementById("successMessage").textContent = 
+                "Registration Successful!";
+
+            form.reset();
+        }
+    });
+</script>
+
+</body>
+</html>

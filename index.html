@@ -1,213 +1,299 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Exam Registration Form</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+<title>Exam Registration Form</title>
 
-        body {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-        }
+<style>
 
-        .container {
-            background: white;
-            padding: 30px;
-            width: 400px;
-            border-radius: 10px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
 
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #333;
-        }
+body{
+    background:linear-gradient(135deg,#667eea,#764ba2);
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    min-height:100vh;
+    padding:40px;
+}
 
-        .form-group {
-            margin-bottom: 15px;
-        }
+.container{
+    width:900px;
+    background:#fff;
+    border-radius:12px;
+    padding:30px;
+    box-shadow:0 10px 25px rgba(0,0,0,.2);
+}
 
-        label {
-            font-weight: bold;
-        }
+h2{
+    text-align:center;
+    margin-bottom:25px;
+    color:#333;
+}
 
-        input, select {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
+.form-group{
+    margin-bottom:18px;
+}
 
-        input:focus, select:focus {
-            border-color: #667eea;
-            outline: none;
-        }
+label{
+    display:block;
+    margin-bottom:6px;
+    font-weight:bold;
+}
 
-        button {
-            width: 100%;
-            padding: 10px;
-            background: #667eea;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
+input,
+select{
+    width:100%;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-size:15px;
+}
 
-        button:hover {
-            background: #5a67d8;
-        }
+input:focus,
+select:focus{
+    border-color:#667eea;
+    outline:none;
+}
 
-        .error {
-            color: red;
-            font-size: 12px;
-        }
+.error{
+    color:red;
+    font-size:13px;
+}
 
-        #successMessage {
-            margin-top: 15px;
-            text-align: center;
-            font-weight: bold;
-            color: green;
-        }
-    </style>
+.success{
+    color:green;
+    font-weight:bold;
+    text-align:center;
+    margin-top:15px;
+}
+
+.button-group{
+    display:flex;
+    gap:10px;
+    margin-top:15px;
+}
+
+button{
+    flex:1;
+    padding:12px;
+    border:none;
+    border-radius:6px;
+    background:#667eea;
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+    transition:.3s;
+}
+
+button:hover{
+    background:#4d5fe0;
+}
+
+.resetBtn{
+    background:#dc3545;
+}
+
+.resetBtn:hover{
+    background:#bb2d3b;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:35px;
+}
+
+table th{
+    background:#667eea;
+    color:white;
+    padding:12px;
+}
+
+table td{
+    padding:10px;
+    text-align:center;
+    border:1px solid #ddd;
+}
+
+.deleteBtn{
+    background:red;
+    color:white;
+    border:none;
+    padding:6px 10px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.deleteBtn:hover{
+    background:darkred;
+}
+
+.show-password{
+    display:flex;
+    align-items:center;
+    margin-top:8px;
+}
+
+.show-password input{
+    width:auto;
+    margin-right:8px;
+}
+
+</style>
 </head>
 
 <body>
 
 <div class="container">
-    <h2>Exam Registration</h2>
 
-    <form id="registrationForm">
+<h2>Exam Registration Form</h2>
 
-        <div class="form-group">
-            <label>Full Name</label>
-            <input type="text" id="name">
-            <small class="error" id="nameError"></small>
-        </div>
+<form id="registrationForm">
 
-        <div class="form-group">
-            <label>Email</label>
-            <input type="email" id="email">
-            <small class="error" id="emailError"></small>
-        </div>
+<div class="form-group">
+<label>Full Name</label>
+<input type="text" id="name">
+<small class="error" id="nameError"></small>
+</div>
 
-        <div class="form-group">
-            <label>Phone Number</label>
-            <input type="text" id="phone">
-            <small class="error" id="phoneError"></small>
-        </div>
+<div class="form-group">
+<label>Email</label>
+<input type="email" id="email">
+<small class="error" id="emailError"></small>
+</div>
 
-        <div class="form-group">
-            <label>Date of Birth</label>
-            <input type="date" id="dob">
-            <small class="error" id="dobError"></small>
-        </div>
+<div class="form-group">
+<label>Phone Number</label>
+<input type="text" id="phone">
+<small class="error" id="phoneError"></small>
+</div>
 
-        <div class="form-group">
-            <label>Gender</label>
-            <select id="gender">
-                <option value="">Select Gender</option>
-                <option>Male</option>
-                <option>Female</option>
-                <option>Other</option>
-            </select>
-            <small class="error" id="genderError"></small>
-        </div>
+<div class="form-group">
+<label>Date of Birth</label>
+<input type="date" id="dob">
+<small class="error" id="dobError"></small>
+</div>
 
-        <div class="form-group">
-            <label>Exam Type</label>
-            <select id="exam">
-                <option value="">Select Exam</option>
-                <option>Engineering Entrance</option>
-                <option>Medical Entrance</option>
-                <option>Banking Exam</option>
-                <option>Government Exam</option>
-            </select>
-            <small class="error" id="examError"></small>
-        </div>
+<div class="form-group">
+<label>Gender</label>
 
-        <button type="submit">Register</button>
+<select id="gender">
+<option value="">Select Gender</option>
+<option>Male</option>
+<option>Female</option>
+<option>Other</option>
+</select>
 
-        <p id="successMessage"></p>
+<small class="error" id="genderError"></small>
 
-    </form>
+</div>
+
+<div class="form-group">
+
+<label>Exam Type</label>
+
+<select id="exam">
+
+<option value="">Select Exam</option>
+
+<option>Engineering Entrance</option>
+
+<option>Medical Entrance</option>
+
+<option>Banking Exam</option>
+
+<option>Government Exam</option>
+
+</select>
+
+<small class="error" id="examError"></small>
+
+</div>
+
+<div class="form-group">
+
+<label>Password</label>
+
+<input type="password" id="password">
+
+<small class="error" id="passwordError"></small>
+
+</div>
+
+<div class="form-group">
+
+<label>Confirm Password</label>
+
+<input type="password" id="confirmPassword">
+
+<small class="error" id="confirmPasswordError"></small>
+
+</div>
+
+<div class="show-password">
+
+<input type="checkbox" id="showPassword">
+
+<label for="showPassword">Show Password</label>
+
+</div>
+
+<div class="button-group">
+
+<button type="submit">
+
+Register
+
+</button>
+
+<button type="reset" class="resetBtn">
+
+Clear
+
+</button>
+
+</div>
+
+<p id="successMessage" class="success"></p>
+
+</form>
+
+<h2 style="margin-top:40px;">Registered Students</h2>
+
+<table id="studentTable">
+
+<thead>
+
+<tr>
+
+<th>Name</th>
+
+<th>Email</th>
+
+<th>Phone</th>
+
+<th>Exam</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+</tbody>
+
+</table>
+
 </div>
 
 <script>
-    const form = document.getElementById("registrationForm");
-
-    form.addEventListener("submit", function(e) {
-        e.preventDefault();
-
-        const name = document.getElementById("name").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const phone = document.getElementById("phone").value.trim();
-        const dob = document.getElementById("dob").value;
-        const gender = document.getElementById("gender").value;
-        const exam = document.getElementById("exam").value;
-
-        document.querySelectorAll(".error").forEach(el => el.textContent = "");
-        document.getElementById("successMessage").textContent = "";
-
-        let isValid = true;
-
-        if (name === "") {
-            document.getElementById("nameError").textContent = "Name is required";
-            isValid = false;
-        }
-
-        const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-        if (!email.match(emailPattern)) {
-            document.getElementById("emailError").textContent = "Enter valid email";
-            isValid = false;
-        }
-
-        const phonePattern = /^[0-9]{10}$/;
-        if (!phone.match(phonePattern)) {
-            document.getElementById("phoneError").textContent = "Enter 10 digit phone number";
-            isValid = false;
-        }
-
-        if (dob === "") {
-            document.getElementById("dobError").textContent = "Date of birth required";
-            isValid = false;
-        }
-
-        if (gender === "") {
-            document.getElementById("genderError").textContent = "Select gender";
-            isValid = false;
-        }
-
-        if (exam === "") {
-            document.getElementById("examError").textContent = "Select exam";
-            isValid = false;
-        }
-
-        if (isValid) {
-            const studentData = { name, email, phone, dob, gender, exam };
-
-            let registrations = JSON.parse(localStorage.getItem("registrations")) || [];
-            registrations.push(studentData);
-            localStorage.setItem("registrations", JSON.stringify(registrations));
-
-            document.getElementById("successMessage").textContent = 
-                "Registration Successful!";
-
-            form.reset();
-        }
-    });
-</script>
-
-</body>
-</html>
